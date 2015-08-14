@@ -12,10 +12,10 @@ class Initializer extends Application {
 	}
 	
 	function loadFramework() {
-		$files = scandir('lib/framework');
+		$files = scandir(dirname(__FILE__));
 		foreach($files as $file) {
 			if ($file != '.' and $file != '..') {
-				include_once 'lib/framework/' . $file;
+				include_once dirname(__FILE__) .'/' . $file;
 			}
 		}
 	}
