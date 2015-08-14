@@ -1,6 +1,7 @@
 {
     "name": "hugoabonizio/birds",
     "description": "Web framework inspired by Rails",
+    "version": "1.0.0",
     "authors": [
         {
             "name": "Hugo Abonizio",
