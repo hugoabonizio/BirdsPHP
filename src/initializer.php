@@ -8,6 +8,7 @@ class Initializer extends Application {
 	function __construct() {
 		$this->loadFramework();
 		$this->loadControllers();
+    $this->loadModels();
 		$this->loadRoutes();
 	}
 	
@@ -20,6 +21,17 @@ class Initializer extends Application {
 		}
 	}
 	
+  function loadModels() {
+		if (is_dir('app/models')) {
+			$files = scandir('app/models');
+			foreach($files as $file) {
+				if ($file != '.' and $file != '..') {
+					include 'app/models/' . $file;
+				}
+			}
+		}
+	}
+  
 	function loadControllers() {
 		if (is_dir('app/controllers')) {
 			$files = scandir('app/controllers');
