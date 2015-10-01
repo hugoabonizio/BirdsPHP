@@ -26,6 +26,6 @@ class Router {
 	}
   
   static private function convert_params($string) {
-    return preg_replace("/:(.*)/", "(?<aaa>[a-z-A-B0-9]+)", $string);
+    return preg_replace("/:[\w]+/", "(?<aaa>[a-z-A-B0-9]+)", $string);
   }
 }
