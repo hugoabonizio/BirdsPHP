@@ -2,7 +2,8 @@
 class RouterTest extends \PHPUnit_Framework_TestCase {
 	function setUp() {
 		\Framework\Router::draw(array(
-			['GET', '/', 'welcome#index']
+			['GET', '/', 'welcome#index'],
+      ['GET', '/show/:id', 'resource#show']
 		));
 	}
 	
@@ -13,5 +14,6 @@ class RouterTest extends \PHPUnit_Framework_TestCase {
 	
 	function test404() {
 		$this->assertEquals(404, \Framework\Router::route('GET', '/aaaa'));
+    $this->assertEquals(404, \Framework\Router::route('GET', '/a/b'));
 	}
 }
