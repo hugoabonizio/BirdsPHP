@@ -1,8 +1,10 @@
 <?php
 namespace Framework;
-include_once 'application.php';
 
-session_start();
+if (!isset($_SESSION)) { 
+  session_start(); 
+}
+include_once 'application.php';
 
 class Initializer extends Application {
 	function __construct() {
