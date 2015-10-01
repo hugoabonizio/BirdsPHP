@@ -10,6 +10,8 @@ class Application {
 		} else {
 			// if it's in format "controller#action"
 			if (is_string($route)) {
+        $this->extract_params(Router::route_pattern($METHOD, $URI), $URI);
+        
 				$parts = explode('#', $route);
 				$controller = $parts[0] . "Controller";
 				$action = $parts[1];
@@ -33,4 +35,8 @@ class Application {
 			}
 		}
 	}
+  
+  private function extract_params($pattern, $uri) {
+    
+  }
 }

@@ -25,7 +25,26 @@ class Router {
 		return 404;
 	}
   
+  static function extract_params($method, $uri) {
+    $uri = substr($uri, 1);
+    if ($uri[strlen($uri) - 1] == '/')
+      $uri = substr($uri, 0, -1);
+    $pattern = '';
+    foreach (array_keys(self::$_routes) as $route) {
+      if (preg_match($route, $uri)) {
+			  $pattern = $route;
+        break;
+      }
+    }
+    preg_match($pattern, $uri, $params);
+    foreach($params as $param=>$value) {
+      if (!is_numeric($param)) {
+        $_REQUEST[$param] = $value;
+      }
+    }
+	}
+  
   static private function convert_params($string) {
-    return preg_replace("/:[\w]+/", "(?<aaa>[a-z-A-B0-9]+)", $string);
+    return preg_replace("/:([\w]+)/", '(?<$1>[a-z-A-B0-9]+)', $string);
   }
 }

@@ -26,4 +26,9 @@ class RouterTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals(404, \Framework\Router::route('GET', '/show'));
     $this->assertEquals('resource#edit', \Framework\Router::route('GET', '/resource/10/edit'));
   }
+  
+  function testGetParams() {
+    \Framework\Router::extract_params('GET', '/resource/10/edit/');
+    $this->assertEquals('10', $_REQUEST['id']);
+  }
 }
