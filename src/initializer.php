@@ -52,6 +52,7 @@ class Initializer extends Application {
 	}
 	
 	function run() {
-		parent::route($_SERVER['REQUEST_METHOD'], $_SERVER['PATH_INFO']);
+    $path = strtok($_SERVER['REQUEST_URI'],'?');
+		parent::route($_SERVER['REQUEST_METHOD'], $path);
 	}
 }
