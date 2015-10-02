@@ -25,4 +25,12 @@ class ControllerBase {
 			return $_SESSION[$name];
 		}
 	}
+  
+  function params($name = '') {
+		if (empty($name)) {
+			return $_REQUEST;
+		} else {
+			return $_REQUEST[$name];
+		}
+	}
 }
