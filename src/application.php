@@ -43,7 +43,8 @@ class Application {
 	}
   
   private function serve_static($uri) {
-    $files = explode('/', $uri);
-    return file_get_contents($this->public_folder . $files[count($files) - 1]);
+    $folders = explode('/', $this->public_folder);
+    $public_folder_name = $folders[count($folders) - 2];
+    return file_get_contents($this->public_folder . end(explode($public_folder_name, $uri)));
   }
 }

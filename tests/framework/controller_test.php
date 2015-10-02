@@ -41,4 +41,12 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
 		$result = ob_get_clean();
 		$this->assertEquals('body { background: black; }', $result);
   }
+  
+  function testStaticFilesInsideFolder() {
+    $this->app->public_folder = dirname(__FILE__) . '/public/';
+    ob_start();
+		$this->app->route('GET', '/public/js/script.js');
+		$result = ob_get_clean();
+		$this->assertEquals('alert(666);', $result);
+  }
 }
