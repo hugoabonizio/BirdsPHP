@@ -1,12 +1,13 @@
 <?php
 class RouterTest extends \PHPUnit_Framework_TestCase {
 	function setUp() {
-		\Framework\Router::draw(array(
+		\Framework\Router::draw([
 			['GET', '/', 'welcome#index'],
       ['GET', '/new', 'welcome#new'],
       ['GET', '/show/:id', 'resource#show'],
-      ['GET', '/resource/:id/edit', 'resource#edit']
-		));
+      ['GET', '/resource/:id/edit', 'resource#edit'],
+      ['RESOURCES', 'users']
+		]);
 	}
 	
 	function testAddRoute() {
@@ -30,5 +31,14 @@ class RouterTest extends \PHPUnit_Framework_TestCase {
   function testGetParams() {
     \Framework\Router::extract_params('GET', '/resource/10/edit/');
     $this->assertEquals('10', $_REQUEST['id']);
+  }
+  
+  function testResources() {
+    $this->assertEquals('users#index', \Framework\Router::route('GET', '/users'));
+    $this->assertEquals('users#add', \Framework\Router::route('GET', '/users/add'));
+    $this->assertEquals('users#create', \Framework\Router::route('POST', '/users'));
+    $this->assertEquals('users#edit', \Framework\Router::route('GET', '/users/1/edit'));
+    $this->assertEquals('users#update', \Framework\Router::route('POST', '/users/1'));
+    $this->assertEquals('users#destroy', \Framework\Router::route('POST', '/users/1/destroy'));
   }
 }
