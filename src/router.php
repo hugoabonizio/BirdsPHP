@@ -7,11 +7,23 @@ class Router {
   // format ['GET', '/', 'welcome#index']
 	static function draw($routes) {
 		foreach ($routes as $route) {
-      if ($route[1][0] == '/') {
-        $route[1] = substr($route[1], 1);
+      if (strtoupper($route[0]) == 'RESOURCE' or strtoupper($route[0]) == 'RESOURCES') {
+        self::draw([
+          ['GET', "/$route[1]", "$route[1]#index"],
+          ['GET', "/$route[1]/add", "$route[1]#add"],
+          ['POST', "/$route[1]", "$route[1]#create"],
+          ['GET', "/$route[1]/:id", "$route[1]#show"],
+          ['GET', "/$route[1]/:id/edit", "$route[1]#edit"],
+          ['POST', "/$route[1]/:id", "$route[1]#update"],
+          ['POST', "/$route[1]/:id/destroy", "$route[1]#destroy"]
+        ]);
+      } else {
+        if ($route[1][0] == '/') {
+          $route[1] = substr($route[1], 1);
+        }
+        $regex_route = '/^' . self::convert_params(str_replace('/', '\/', $route[1])) . '$/';
+        self::$_routes[$regex_route][strtoupper($route[0])] = $route[2];
       }
-      $regex_route = '/^' . self::convert_params(str_replace('/', '\/', $route[1])) . '$/';
-			self::$_routes[$regex_route][strtoupper($route[0])] = $route[2];
 		}
 	}
 	
