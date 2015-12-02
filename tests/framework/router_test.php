@@ -7,6 +7,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase {
       ['GET', '/about/', 'welcome#about'],
       ['GET', '/show/:id', 'resource#show'],
       ['GET', '/resource/:id/edit', 'resource#edit'],
+      ['GET', '/users/select', 'users#select'],
       ['RESOURCES', 'users']
 		]);
 	}
@@ -44,5 +45,6 @@ class RouterTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals('users#edit', \Framework\Router::route('GET', '/users/1/edit'));
     $this->assertEquals('users#update', \Framework\Router::route('POST', '/users/1'));
     $this->assertEquals('users#destroy', \Framework\Router::route('POST', '/users/1/destroy'));
+    $this->assertEquals('users#select', \Framework\Router::route('GET', '/users/select'));
   }
 }
