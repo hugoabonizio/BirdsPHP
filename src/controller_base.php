@@ -18,19 +18,27 @@ class ControllerBase {
 		header('Location: ' . $to);
 	}
 	
-	function session($name = '') {
+	function session($name = '', $value = '') {
 		if (empty($name)) {
 			return $_SESSION;
 		} else {
-			return $_SESSION[$name];
+      if (empty($value)) {
+			  return $_SESSION[$name];
+      } else {
+        return $_SESSION[$name] = $value;
+      }
 		}
 	}
   
-  function params($name = '') {
+  function params($name = '', $value = '') {
 		if (empty($name)) {
 			return $_REQUEST;
 		} else {
-			return $_REQUEST[$name];
+      if (empty($value)) {
+			  return $_REQUEST[$name];
+      } else {
+        return $_REQUEST[$name] = $value;
+      }
 		}
 	}
 }

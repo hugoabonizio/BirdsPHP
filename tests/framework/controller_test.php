@@ -1,12 +1,13 @@
 <?php
 class SessionController extends \Framework\ControllerBase {
 	function index() {
-		return $this->session['test1'] = 123;
+    $this->session('test1', 123);
+		return $this->session('test1');
 	}
   
   function param() {
-    $this->params['test1'] = 666;
-    return $this->params['test1'];
+    $this->params('test1', 666);
+    return $this->params('test1');
   }
 }
 
