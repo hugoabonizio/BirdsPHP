@@ -9,11 +9,18 @@ class SessionController extends \Framework\ControllerBase {
     $this->params('test1', 666);
     return $this->params('test1');
   }
+  
+  function message() {
+    $this->flash('error', 'Deu erro!');
+//     var_dump($_SESSION);
+    return $this->flash('error');
+  }
 }
 
 \Framework\Router::draw(array(
 	['GET', '/session', 'session#index'],
-  ['GET', '/param', 'session#param']
+  ['GET', '/param', 'session#param'],
+  ['GET', '/message', 'session#message']
 ));
 
 class ControllerTest extends \PHPUnit_Framework_TestCase {
@@ -49,5 +56,12 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
 		$this->app->route('GET', '/public/js/script.js');
 		$result = ob_get_clean();
 		$this->assertEquals('alert(666);', $result);
+  }
+  
+  function testFlashMessage() {
+    ob_start();
+    $this->app->route('GET', '/message');
+    $result = ob_get_clean();
+		$this->assertEquals('Deu erro!', $result);
   }
 }

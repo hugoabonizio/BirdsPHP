@@ -18,11 +18,11 @@ class ControllerBase {
 		header('Location: ' . $to);
 	}
 	
-	function session($name = '', $value = '') {
-		if (empty($name)) {
+	function session($name = null, $value = null) {
+		if (null === $name) {
 			return $_SESSION;
 		} else {
-      if (empty($value)) {
+      if (null === $value) {
 			  return $_SESSION[$name];
       } else {
         return $_SESSION[$name] = $value;
@@ -30,15 +30,31 @@ class ControllerBase {
 		}
 	}
   
-  function params($name = '', $value = '') {
-		if (empty($name)) {
+  function params($name = null, $value = null) {
+		if (null === $name) {
 			return $_REQUEST;
 		} else {
-      if (empty($value)) {
+      if (null === $value) {
 			  return $_REQUEST[$name];
       } else {
         return $_REQUEST[$name] = $value;
       }
 		}
+	}
+  
+  function flash($type = null, $value = null) {
+		if (!isset($_SESSION['flash'])) {
+      $this->session('flash', []);
+    }
+    
+    if (null === $type and null === $value) {
+      return empty($this->session('flash'));
+    } else {
+      if (null === $value) {
+        return $this->session('flash')[$type];
+      } else {
+        return $_SESSION['flash'][$type] = $value;
+      }
+    }
 	}
 }
