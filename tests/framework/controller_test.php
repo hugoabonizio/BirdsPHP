@@ -10,9 +10,11 @@ class SessionController extends \Framework\ControllerBase {
     return $this->params('test1');
   }
   
-  function message() {
-    $this->flash('error', 'Deu erro!');
-//     var_dump($_SESSION);
+  function set_flash() {
+    $this->flash('error', 'Algum problema!');
+    return '';
+  }
+  function get_flash() {
     return $this->flash('error');
   }
 }
@@ -20,7 +22,8 @@ class SessionController extends \Framework\ControllerBase {
 \Framework\Router::draw(array(
 	['GET', '/session', 'session#index'],
   ['GET', '/param', 'session#param'],
-  ['GET', '/message', 'session#message']
+  ['GET', '/set_flash', 'session#set_flash'],
+  ['GET', '/get_flash', 'session#get_flash']
 ));
 
 class ControllerTest extends \PHPUnit_Framework_TestCase {
@@ -60,8 +63,15 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
   
   function testFlashMessage() {
     ob_start();
-    $this->app->route('GET', '/message');
+    $this->app->route('GET', '/set_flash');
+    $this->app->route('GET', '/get_flash');
     $result = ob_get_clean();
-		$this->assertEquals('Deu erro!', $result);
+		$this->assertEquals('Algum problema!', $result);
+    
+    // second time
+    ob_start();
+    $this->app->route('GET', '/get_flash');
+    $result = ob_get_clean();
+    $this->assertEquals('', $result);
   }
 }

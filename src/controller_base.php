@@ -51,7 +51,9 @@ class ControllerBase {
       return empty($this->session('flash'));
     } else {
       if (null === $value) {
-        return $this->session('flash')[$type];
+        $temp = $this->session('flash')[$type]; // destroy after retrive
+        $_SESSION['flash'][$type] = '';
+        return $temp;
       } else {
         return $_SESSION['flash'][$type] = $value;
       }

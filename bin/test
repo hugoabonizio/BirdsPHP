@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-phpunit --bootstrap tests/bootstrap.php $1
+phpunit -v --bootstrap tests/bootstrap.php $1
