@@ -4,6 +4,9 @@ namespace Framework;
 class Renderer {
 	static function render_view($instance, $controller, $action) {
 		if (file_exists('app/views/' . $controller . '/' . $action . '.php')) {
+      @include 'app/helpers/application_helper.php';
+      @include 'app/helpers/' . $controller . '_helper.php';
+      
 			extract(get_object_vars($instance));
 			ob_start();
 			include 'app/views/' . $controller . '/' . $action . '.php';
