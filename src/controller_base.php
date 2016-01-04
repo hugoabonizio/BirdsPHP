@@ -19,44 +19,14 @@ class ControllerBase {
 	}
 	
 	function session($name = null, $value = null) {
-		if (null === $name) {
-			return $_SESSION;
-		} else {
-      if (null === $value) {
-			  return $_SESSION[$name];
-      } else {
-        return $_SESSION[$name] = $value;
-      }
-		}
+		return session($name, $value);
 	}
   
   function params($name = null, $value = null) {
-		if (null === $name) {
-			return $_REQUEST;
-		} else {
-      if (null === $value) {
-			  return $_REQUEST[$name];
-      } else {
-        return $_REQUEST[$name] = $value;
-      }
-		}
+		return params($name, $value);
 	}
   
   function flash($type = null, $value = null) {
-		if (!isset($_SESSION['flash'])) {
-      $this->session('flash', []);
-    }
-    
-    if (null === $type and null === $value) {
-      return empty($this->session('flash'));
-    } else {
-      if (null === $value) {
-        $temp = $this->session('flash')[$type]; // destroy after retrive
-        $_SESSION['flash'][$type] = '';
-        return $temp;
-      } else {
-        return $_SESSION['flash'][$type] = $value;
-      }
-    }
+		return flash($type, $value);
 	}
 }

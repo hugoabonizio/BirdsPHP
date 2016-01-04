@@ -1,5 +1,5 @@
 <?php
-class TestingController {
+class TestingController extends \Framework\ControllerBase {
 	function index() {
 		return "OK!";
 	}
