@@ -29,7 +29,8 @@ function flash($type = null, $value = null) {
   }
 
   if (null === $type and null === $value) {
-    return (empty(session('flash'))) ? true : false;
+    $flash = session('flash');
+    return (empty($flash)) ? true : false;
   } else {
     if (null === $value) {
       $temp = session('flash')[$type]; // destroy after retrive
