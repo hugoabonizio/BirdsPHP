@@ -4,6 +4,7 @@ require_once 'router.php';
 
 class Application {
   public $public_folder = "public/";
+  public $prefix = "";
   
 	function route($method, $uri) {
     if (substr($uri, 0, strlen("/public/")) == "/public/") { // serve static files
