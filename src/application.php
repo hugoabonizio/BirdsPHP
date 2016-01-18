@@ -4,7 +4,7 @@ require_once 'router.php';
 
 class Application {
   public $public_folder = "public/";
-  public $prefix = "";
+  public $url_prefix = "";
   
 	function route($method, $uri) {
     if (substr($uri, 0, strlen("/public/")) == "/public/") { // serve static files
@@ -23,6 +23,10 @@ class Application {
           $action = $parts[1];
           // create a new controller instance
           $instance = new $controller();
+          
+          // inject some config variables
+          $instance->url_prefix = $this->url_prefix;
+          $instance->public_folder = $this->public_folder;
 
           // execute before callback
           $instance->before_action();
