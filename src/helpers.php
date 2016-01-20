@@ -41,3 +41,18 @@ function flash($type = null, $value = null) {
     }
   }
 }
+
+function url($uri, $params = []) {
+  $final = \Framework\Application::$url_prefix . trim($uri, '/');
+  
+  if (array_values($params) === $params) { // pass params in array
+    foreach ($params as $param) {
+      $final = preg_replace('/:(\w+)/', $param, $final, 1);
+    }
+  } else {
+    foreach ($params as $param=>$value) {
+      $final = str_replace(":$param", $value, $final);
+    }
+  }
+  return $final;
+}

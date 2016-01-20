@@ -7,7 +7,7 @@ class ControllerBase {
 	function layout($layout) {
 		$this->_layout = $layout;
 	}
-	
+  
 	// callbacks
 	function before_action() {
 	}
