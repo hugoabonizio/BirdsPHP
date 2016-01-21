@@ -43,7 +43,7 @@ function flash($type = null, $value = null) {
 }
 
 function url($uri, $params = []) {
-  $final = \Framework\Application::$url_prefix . trim($uri, '/');
+  $final = rtrim(\Framework\Application::$url_prefix, '/') . $uri;
   
   if (array_values($params) === $params) { // pass params in array
     foreach ($params as $param) {
@@ -55,4 +55,13 @@ function url($uri, $params = []) {
     }
   }
   return $final;
+}
+
+function link_to($action, $text) {
+  if ($action instanceof \TORM\Model) {
+    $result = url('/' . strtolower(get_class($action)) . 's/:id', [$action->id]);
+  } else {
+    $result = url($action);
+  }
+  return "<a href=\"$result\">$text</a>";
 }
