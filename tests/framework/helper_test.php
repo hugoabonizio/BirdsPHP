@@ -18,5 +18,6 @@ class HelperTest extends \PHPUnit_Framework_TestCase {
     $model = new Model;
     $model->id = 2;
     $this->assertEquals('<a href="/pre/models/2">Text 2</a>', link_to($model, 'Text 2'));
+    $this->assertEquals('<a href="/pre/models/2" class="btn" id="aa">Text 2</a>', link_to($model, 'Text 2', ['class' => 'btn', 'id' => 'aa']));
   }
 }

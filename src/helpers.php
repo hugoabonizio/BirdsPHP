@@ -62,11 +62,16 @@ function url($uri, $params = []) {
   return $final;
 }
 
-function link_to($action, $text) {
+function link_to($action, $text, $html = []) {
   if ($action instanceof \TORM\Model) {
     $result = url('/' . strtolower(get_class($action)) . 's/:id', [$action->id]);
   } else {
     $result = url($action);
   }
-  return "<a href=\"$result\">$text</a>";
+  $attrs = '';
+  foreach ($html as $attr=>$value) {
+    $attrs .= " $attr=\"$value\"";
+  }
+
+  return "<a href=\"$result\"$attrs>$text</a>";
 }
