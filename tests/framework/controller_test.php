@@ -17,13 +17,17 @@ class SessionController extends \Framework\ControllerBase {
   function get_flash() {
     return $this->flash('error');
   }
+  function empty_flash() {
+    return ($this->flash()) ? 'true' : 'false';
+  }
 }
 
 \Framework\Router::draw(array(
 	['GET', '/session', 'session#index'],
   ['GET', '/param', 'session#param'],
   ['GET', '/set_flash', 'session#set_flash'],
-  ['GET', '/get_flash', 'session#get_flash']
+  ['GET', '/get_flash', 'session#get_flash'],
+  ['GET', '/empty_flash', 'session#empty_flash']
 ));
 
 class ControllerTest extends \PHPUnit_Framework_TestCase {
@@ -73,5 +77,20 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
     $this->app->route('GET', '/get_flash');
     $result = ob_get_clean();
     $this->assertEquals('', $result);
+  }
+  
+  function testTestingFlash() {
+    ob_start();
+    $this->app->route('GET', '/set_flash');
+    $this->app->route('GET', '/empty_flash');
+    $result = ob_get_clean();
+    $this->assertEquals('true', $result);
+    
+    ob_start();
+    $this->app->route('GET', '/get_flash');
+    $this->app->route('GET', '/empty_flash');
+    $result = ob_get_clean();
+    $this->assertEquals('Algum problema!false', $result);
+    
   }
 }

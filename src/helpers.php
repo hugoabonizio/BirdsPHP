@@ -28,14 +28,19 @@ function flash($type = null, $value = null) {
     session('flash', []);
   }
 
+  $flash = session('flash');
+  
   if (null === $type and null === $value) {
-    $flash = session('flash');
-    return (empty($flash)) ? true : false;
+    return (empty($flash)) ? false : true;
   } else {
     if (null === $value) {
-      $temp = session('flash')[$type]; // destroy after retrive
-      $_SESSION['flash'][$type] = '';
-      return $temp;
+      if (isset($flash[$type])) {
+        $temp = $flash[$type]; // will be destroyed after retrive
+        unset($_SESSION['flash'][$type]);
+        return $temp;
+      } else {
+        return '';
+      }
     } else {
       return $_SESSION['flash'][$type] = $value;
     }
