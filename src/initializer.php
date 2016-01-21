@@ -55,8 +55,9 @@ class Initializer extends Application {
   }
   
   function run($uri, $method) {
-    if (substr($uri, 0, strlen($this->url_prefix)) == $this->url_prefix) {
-      $uri = substr($uri, strlen($this->url_prefix));
+    $url_prefix = \Framework\Application::$url_prefix;
+    if (substr($uri, 0, strlen($url_prefix)) == $url_prefix) {
+      $uri = substr($uri, strlen($url_prefix));
     }
     $path = strtok($uri, '?');
     if ($path[0] != '/') $path = '/' . $path;
