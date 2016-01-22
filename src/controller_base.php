@@ -15,7 +15,7 @@ class ControllerBase {
 	}
 	
 	function redirect($to) {
-		header('Location: ' . $to);
+		header('Location: ' . url($to));
 	}
 	
 	function session($name = null, $value = null) {
