@@ -3,10 +3,15 @@ namespace Framework;
 
 class ControllerBase {
 	public $_layout = 'application';
+  public $_view = null;
 	
 	function layout($layout) {
 		$this->_layout = $layout;
 	}
+  
+  function render($view) {
+    $this->_view = $view;
+  }
   
 	// callbacks
 	function before_action() {
