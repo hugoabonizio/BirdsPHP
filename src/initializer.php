@@ -7,6 +7,16 @@ if (!isset($_SESSION)) {
 
 include_once 'application.php';
 
+// autoloading models/controllers
+spl_autoload_register(function ($name) {
+  foreach(['models', 'controllers'] as $folder) {
+    if (file_exists("app/$folder/" . strtolower($name) . '.php')) {
+      include_once "app/$folder/" . strtolower($name) . '.php';
+      return;
+    }
+  }
+});
+
 header('Content-Type: text/html; charset=utf-8');
 
 class Initializer extends Application {
@@ -31,7 +41,7 @@ class Initializer extends Application {
       $files = scandir('app/models');
       foreach ($files as $file) {
         if ($file != '.' and $file != '..') {
-          include 'app/models/' . $file;
+          include_once 'app/models/' . $file;
         }
       }
     }
@@ -42,7 +52,7 @@ class Initializer extends Application {
       $files = scandir('app/controllers');
       foreach ($files as $file) {
         if ($file != '.' and $file != '..') {
-          include 'app/controllers/' . $file;
+          include_once 'app/controllers/' . $file;
         }
       }
     }
