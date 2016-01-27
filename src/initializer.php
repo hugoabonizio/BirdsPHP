@@ -17,8 +17,6 @@ spl_autoload_register(function ($name) {
   }
 });
 
-header('Content-Type: text/html; charset=utf-8');
-
 class Initializer extends Application {
   function __construct() {
     $this->loadFramework();

@@ -8,8 +8,9 @@ class Application {
   
 	function route($method, $uri) {
     if (substr($uri, 0, strlen("/public/")) == "/public/") { // serve static files
-      echo $this->serve_static($uri);
+      $this->serve_static($uri);
     } else { // dynamic content
+      header('Content-Type: text/html; charset=utf-8');
       $route = Router::route($method, $uri);
       if (is_numeric($route) and $route == 404) {
         echo 404;
@@ -48,8 +49,14 @@ class Application {
 	}
   
   private function serve_static($uri) {
+    
     $folders = explode('/', $this->public_folder);
     $public_folder_name = $folders[count($folders) - 2];
-    return file_get_contents($this->public_folder . end(explode($public_folder_name, $uri)));
+    $file = $this->public_folder . end(explode($public_folder_name, $uri));
+    
+    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+    header('Content-Type: ' . finfo_file($finfo, $file) . ';');
+    
+    echo file_get_contents($file);
   }
 }
