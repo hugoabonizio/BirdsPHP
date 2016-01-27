@@ -18,6 +18,10 @@ class RenderTest extends \PHPUnit_Framework_TestCase {
 	function setUp() {
 		$this->app = new \Framework\Application;
 	}
+  
+  /**
+   * @runInSeparateProcess
+   */
 	function testRenderText() {
 		ob_start();
 		$this->app->route('GET', '/test1');
@@ -25,6 +29,9 @@ class RenderTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals('OK!', $rendered);
 	}
   
+  /**
+   * @runInSeparateProcess
+   */
   function testChangingViewName() {
     ob_start();
 		$this->app->route('GET', '/test2');

@@ -10,9 +10,12 @@ class TestingController extends \Framework\ControllerBase {
 ));
 
 class IntegrationTest extends \PHPUnit_Framework_TestCase {
+  /**
+   * @runInSeparateProcess
+   */
   function testIgnoringPrefix() {
     $app = new \Framework\Initializer();
-    $app->url_prefix = '/test/';
+    \Framework\Application::$url_prefix = '/test/';
     ob_start();
     $app->run('/test/test1', 'GET');
     $result = ob_get_clean();

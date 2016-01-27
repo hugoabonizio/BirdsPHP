@@ -35,6 +35,9 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
 		$this->app = new \Framework\Application;
 	}
 	
+  /**
+   * @runInSeparateProcess
+   */
 	function testSessionAction() {
 		ob_start();
 		$this->app->route('GET', '/session');
@@ -42,6 +45,9 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals(123, $result);
 	}
   
+  /**
+   * @runInSeparateProcess
+   */
   function testParamAction() {
 		ob_start();
 		$this->app->route('GET', '/param');
@@ -49,6 +55,9 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals(666, $result);
 	}
   
+  /**
+   * @runInSeparateProcess
+   */
   function testStaticFiles() {
     $this->app->public_folder = dirname(__FILE__) . '/public/';
     ob_start();
@@ -57,6 +66,9 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals('body { background: black; }', $result);
   }
   
+  /**
+   * @runInSeparateProcess
+   */
   function testStaticFilesInsideFolder() {
     $this->app->public_folder = dirname(__FILE__) . '/public/';
     ob_start();
@@ -65,6 +77,9 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals('alert(666);', $result);
   }
   
+  /**
+   * @runInSeparateProcess
+   */
   function testFlashMessage() {
     ob_start();
     $this->app->route('GET', '/set_flash');
@@ -79,6 +94,9 @@ class ControllerTest extends \PHPUnit_Framework_TestCase {
     $this->assertEquals('', $result);
   }
   
+  /**
+   * @runInSeparateProcess
+   */
   function testTestingFlash() {
     ob_start();
     $this->app->route('GET', '/set_flash');

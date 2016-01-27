@@ -20,6 +20,9 @@ class CallbackTest extends \PHPUnit_Framework_TestCase {
 		$this->app = new \Framework\Application;
 	}
 	
+  /**
+   * @runInSeparateProcess
+   */
 	function testBeforeAction() {
 		ob_start();
 		$this->app->route('GET', '/callbacks');
