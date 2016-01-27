@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+for file in $(find tests/framework/ -maxdepth 1 -iname '*.php' -type f)
+do
+  echo "running $file ..."
+  phpunit --colors -v --bootstrap tests/bootstrap.php $file
+done
+  
