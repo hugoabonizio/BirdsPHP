@@ -1,12 +1,12 @@
 <?php
-class TestingController extends \Framework\ControllerBase {
+class IntegrationController extends \Framework\ControllerBase {
 	function index() {
 		return "OK!";
 	}
 }
 
 \Framework\Router::draw(array(
-	['GET', '/test1', 'testing#index']
+	['GET', '/test1', 'integration#index']
 ));
 
 class IntegrationTest extends \PHPUnit_Framework_TestCase {

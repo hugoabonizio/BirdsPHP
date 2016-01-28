@@ -19,7 +19,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase {
 	function setUp() {
 		$this->app = new \Framework\Application;
 	}
-	
+
   /**
    * @runInSeparateProcess
    */
