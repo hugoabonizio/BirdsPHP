@@ -52,7 +52,8 @@ class Application {
     
     $folders = explode('/', $this->public_folder);
     $public_folder_name = $folders[count($folders) - 2];
-    $file = $this->public_folder . end(explode($public_folder_name, $uri));
+    $url_exploded = explode($public_folder_name, $uri);
+    $file = $this->public_folder . end($url_exploded);
     
     $finfo = finfo_open(FILEINFO_MIME_TYPE);
     header('Content-Type: ' . finfo_file($finfo, $file) . ';');
